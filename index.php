@@ -2,8 +2,14 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use App\FileHandler;
+use App\Cmd\AddVH;
+use App\Cmd\Interactive;
 
-$file = new FileHandler;
+use Symfony\Component\Console\Application;
 
-$file->unCommentVHosts();
+$app = new Application('xamp-vh', '1.0.0');
+
+$app->add(new Interactive('i'));
+$app->add(new AddVH('add'));
+
+$app->run();
