@@ -43,7 +43,7 @@ class AddVH extends Command
         // server name
         $val->server = $input->getOption('server');
         // server directory
-        $val->dir = $input->getOption('dir') ?? getcwd();
+        $val->dir =  '"'.($input->getOption('dir') ?? getcwd()). '"';
         // server admin
         $val->admin = $input->getOption('admin') ?? '';
         // server alias
@@ -64,7 +64,7 @@ class AddVH extends Command
             $fh->includeVHosts();
 
             // append new vhost to file
-            $fh->addNewHost();
+            $fh->addNewHost((array)$val);
         } catch (Exception $e) {
             $output->writeln(
                 $this->write('Error: ' . $e->getMessage(), 'white', 'red'),
