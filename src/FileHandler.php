@@ -15,6 +15,7 @@ class FileHandler{
     const VhostFile = 'httpd-vhosts.conf';
     const SYSTEM_ETC = 'C:\Windows\System32\drivers\etc\\';
     const ETC_FILE = 'hosts';
+    const DEFAULT_IP_ADDRESS = '127.0.0.1';
 
     /**
      * filesystem instance
@@ -64,6 +65,22 @@ class FileHandler{
 
         // write to file
         file_put_contents(self::VhostFile, implode("\n", $arr), FILE_APPEND);
+
+        $this->appendHostToHostsFile($val->server);
+    }
+
+    private function appendHostToHostsFile(
+        string $hostName,
+        string $ip = self::DEFAULT_IP_ADDRESS
+    ) : void
+    {
+        chdir(self::SYSTEM_ETC);
+
+        file_put_contents(
+            self::ETC_FILE,
+            $ip . ' ' . $hostName,
+            FILE_APPEND
+        );
     }
 
     private function UnCommentIncludeVHosts() : array
