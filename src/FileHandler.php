@@ -21,13 +21,6 @@ class FileHandler{
      */
     private $fs;
 
-    /**
-     * lines that will be writen to vhosts file
-     *
-     * @var Array
-     */
-    private $lines = [];
-
     public function __construct()
     {
         // switch to hosts folder
@@ -49,7 +42,7 @@ class FileHandler{
         );
     }
 
-    public function addNewHost() : void
+    public function addNewHost(object $val) : void
     {
         // check if vhosts dir exists
         if (!is_dir(self::VhostDir)) {
@@ -65,8 +58,10 @@ class FileHandler{
         //     /*! file_put_contents Will Create the File if not exists */ 
         // }
 
+        $arr =$this->handleVhostsData($val);
+
         // write to file
-        file_put_contents(self::VhostFile, 'project.test', FILE_APPEND);
+        file_put_contents(self::VhostFile, implode("\n", $arr), FILE_APPEND);
     }
 
     private function UnCommentIncludeVHosts() : array
@@ -90,7 +85,39 @@ class FileHandler{
         }
 
         return $arr;
-    } 
+    }
+    
+    private function handleVhostsData(object $val) : array
+    {
+        $output = [];
+
+        // add vhost tag and all values
+        $output[] = '<VirtualHost *:80>';
+
+        if (!empty($val->admin)) {
+            $output[] = 'ServerAdmin '. $val->admin;
+        }
+
+        $output[] = 'DocumentRoot '. $val->dir;
+
+        $output[] = 'ServerName ' . $val->server;
+
+        if (!empty($val->alias)) {
+            $output[] = 'ServerAlias ' . $val->alias;
+        }
+
+        if (strlen($val->errorLog) > 4) {
+            $output[] = 'ErrorLog ' . $val->errorLog;
+        }
+
+        if (strlen($val->customLog) > 4) {
+            $output[] = 'CustomLog ' . $val->customLog;
+        }
+
+        $output[] = "</VirtualHost>\n";
+
+        return $output;
+    }
 
 
 }
