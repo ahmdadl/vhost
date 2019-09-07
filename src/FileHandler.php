@@ -13,6 +13,8 @@ class FileHandler{
     const HostFile = 'httpd.conf';
     const VhostDir = 'extra\\';
     const VhostFile = 'httpd-vhosts.conf';
+    const SYSTEM_ETC = 'C:\Windows\System32\drivers\etc\\';
+    const ETC_FILE = 'hosts';
 
     /**
      * filesystem instance
