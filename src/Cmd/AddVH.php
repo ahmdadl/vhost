@@ -37,38 +37,23 @@ class AddVH extends Command
         InputInterface $input,
         OutputInterface $output
     ) : void {
-        // server name
-        $server = $input->getOption('server');
-        // server directory
-        $dir = $input->getOption('dir') ?? getcwd();
-        // server admin
-        $admin = $input->getOption('admin') ?? '';
-        // server alias
-        $alias = $input->getOption('alias') ?? '';
-        // error log file location
-        $errorLog = $input->getOption('error-log') ?? '';
-        // custom error log
-        $customLog= $input->getOption('custom-log') ?? '';
 
-        $output->writeln([
-            'Creating Virtual Host',
-            $this->sep(60, '*'),
-            '<bg=' . self::TEXT_BG . ';fg=' . self::TEXT_COLOR . '>',
-            $this->sep(),
-            'Server Name: '. $this->tab() . $server,
-            $this->sep(),
-            'Server Directory: ' . $this->tab(1) . $dir,
-            $this->sep(),
-            'Admin Email: ' . $this->tab() . $admin,
-            $this->sep(),
-            'Server Alias: ' . $this->tab() . $alias,
-            $this->sep(),
-            'Error log: ' . $this->tab() . $errorLog,
-            $this->sep(),
-            'Custom log: ' . $this->tab() . $customLog,
-            $this->sep(),
-            '</>',
-        ]);
+        $val = (object)[];
+        // server name
+        $val->server = $input->getOption('server');
+        // server directory
+        $val->dir = $input->getOption('dir') ?? getcwd();
+        // server admin
+        $val->admin = $input->getOption('admin') ?? '';
+        // server alias
+        $val->alias = $input->getOption('alias') ?? '';
+        // error log file location
+        $val->errorLog = $input->getOption('error-log') ?? '';
+        // custom error log
+        $val->customLog = $input->getOption('custom-log') ?? '';
+        
+
+        $output->writeln($this->printAllValues($val));
     }
 }
 
