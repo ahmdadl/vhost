@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Error;
+use Exception;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
@@ -26,28 +28,69 @@ class FileHandler{
      */
     private $lines = [];
 
-    public function __construct() {}
-
-    public function unCommentVHosts() : void
+    public function __construct()
     {
-        $this->changeDir(self::HostDir);
+        // switch to hosts folder
+        chdir(self::HostDir);
+    }
 
+    public function includeVHosts() : void
+    {
         // check if host file exists
-        if (!$this->fs->has(self::HostFile)) {
-            throw new FileNotFoundException(self::HostDir . self::HostFile);
+        if (!file_exists(self::HostFile)) {
+            throw new Exception(self::HostFile . 'Not Found at: ' . self::HostDir);
         }
+
+        // write contents to host file
+        file_put_contents(
+            self::HostFile,
+            $this->UnCommentIncludeVHosts(),
+            LOCK_EX
+        );
     }
 
-    /**
-     * iniate filesystem at hosts directory
-     *
-     * @param string $dir
-     * @return void
-     */
-    private function changeDir(string $dir) : void
+    public function addNewHost() : void
     {
-        $this->fs = new Filesystem(new Local($dir, LOCK_UN));
+        // check if vhosts dir exists
+        if (!is_dir(self::VhostDir)) {
+            throw new Exception(self::VhostDir . ' Directory not Exists at ' . self::HostDir);
+        }
+
+        chdir(self::VhostDir);
+
+        // // check if vhosts file not exists
+        // if (!file_exists(self::VhostFile)) {
+        //     throw new Error('File: ('. self::VhostFile . ') Not Found, Creating One for you.');
+
+        //     /*! file_put_contents Will Create the File if not exists */ 
+        // }
+
+        // write to file
+        file_put_contents(self::VhostFile, 'project.test', FILE_APPEND);
     }
+
+    private function UnCommentIncludeVHosts() : array
+    {
+        $arr = [];
+
+        // get the file contents
+        $file = file(self::HostFile);
+
+        foreach ($file as $lineNum => $line) {
+            // remove any sapaces
+            $line = trim($line);
+
+            // check if our line is commented
+            if ($line === '# Include conf/extra/httpd-vhosts.conf'
+            || $line === '#Include conf/extra/httpd-vhosts.conf') {
+                $line = 'Include conf/extra/httpd-vhosts.conf';
+            }
+
+            $arr[] = $line . PHP_EOL;
+        }
+
+        return $arr;
+    } 
 
 
 }
