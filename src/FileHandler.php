@@ -3,6 +3,7 @@
 namespace App;
 
 use League\Flysystem\Adapter\Local;
+use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 
 class FileHandler{
@@ -26,6 +27,16 @@ class FileHandler{
     private $lines;
 
     public function __construct() {}
+
+    public function unCommentVHosts() : void
+    {
+        $this->changeDir(self::HostDir);
+
+        // check if host file exists
+        if (!$this->fs->has(self::HostFile)) {
+            throw new FileNotFoundException(self::HostDir . self::HostFile);
+        }
+    }
 
     
     private function changeDir(string $dir) : void
