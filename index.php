@@ -5,3 +5,5 @@ require_once __DIR__ . '/vendor/autoload.php';
 use App\FileHandler;
 
 $file = new FileHandler;
+
+$file->unCommentVHosts();
