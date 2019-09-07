@@ -1,0 +1,22 @@
+{
+    "name": "abo3adel/xamp-vh",
+    "description": "create virtual hosts with xampp",
+    "type": "library",
+    "require": {
+        "symfony/console": "^4.3",
+        "league/flysystem": "^1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ahmed adel",
+            "email": "abo3adel35@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
