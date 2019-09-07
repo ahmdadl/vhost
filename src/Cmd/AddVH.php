@@ -3,6 +3,7 @@
 namespace AboAdel\VHost\Cmd;
 
 use AboAdel\VHost\FileHandler;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -54,6 +55,23 @@ class AddVH extends Command
         
 
         $output->writeln($this->printAllValues($val));
+
+        try {
+            // iniate host file handle
+            $fh = new FileHandler;
+
+            // include vhosts file in xampp module loader
+            $fh->includeVHosts();
+
+            // append new vhost to file
+            $fh->addNewHost();
+        } catch (Exception $e) {
+            $output->writeln(
+                $this->write('Error: ' . $e->getMessage(), 'white', 'red'),
+            );
+        } finally {
+            $output->writeln($this->write('Existing Application, GoodBuy.', 'green', 'black'));
+        }
     }
 }
 
