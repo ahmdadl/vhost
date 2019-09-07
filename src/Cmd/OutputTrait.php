@@ -24,8 +24,8 @@ trait OutputTrait{
     public function printAllValues(object $val) : array
     {
         return [
-            'Creating Virtual Host',
-            $this->sep(60, '*'),
+            $this->write('Creating Virutal Host From this data', 'yellow'),
+            $this->sep(40, '='),
             '<bg=' . self::TEXT_BG . ';fg=' . self::TEXT_COLOR . '>',
             $this->sep(),
             'Server Name: '. $this->tab() . $val->server,
