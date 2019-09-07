@@ -30,7 +30,7 @@ trait OutputTrait{
             $this->sep(),
             'ServerName '. $this->tab() . $val->server,
             $this->sep(),
-            'DocumentRoot ' . $this->tab(1) . $val->dir,
+            'DocumentRoot ' . $this->tab() . $val->dir,
             $this->sep(),
             'ServerAdmin ' . $this->tab() . $val->admin,
             $this->sep(),

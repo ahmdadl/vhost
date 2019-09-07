@@ -49,9 +49,9 @@ class AddVH extends Command
         // server alias
         $val->alias = $input->getOption('alias') ?? '';
         // error log file location
-        $val->errorLog = $input->getOption('error-log') ?? '';
+        $val->errorLog = '"'.($input->getOption('error-log') ?? ''). '"';
         // custom error log
-        $val->customLog = $input->getOption('custom-log') ?? '';
+        $val->customLog = '"'.($input->getOption('custom-log') ?? ''). '"';
         
 
         $output->writeln($this->printAllValues($val));
@@ -64,7 +64,7 @@ class AddVH extends Command
             $fh->includeVHosts();
 
             // append new vhost to file
-            $fh->addNewHost((array)$val);
+            $fh->addNewHost($val);
         } catch (Exception $e) {
             $output->writeln(
                 $this->write('Error: ' . $e->getMessage(), 'white', 'red'),
