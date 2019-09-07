@@ -9,7 +9,7 @@ use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 
 class FileHandler{
-    const HostDir = 'C:\xampp\apache\conf\\';
+    const HostDir = 'C:\chromedriver_win32\\';
     const HostFile = 'httpd.conf';
     const VhostDir = 'extra\\';
     const VhostFile = 'httpd-vhosts.conf';
@@ -35,6 +35,12 @@ class FileHandler{
         // check if host file exists
         if (!file_exists(self::HostFile)) {
             throw new Exception(self::HostFile . 'Not Found at: ' . self::HostDir);
+        }
+
+        // check if permission is granted to edit sys files
+        // before adding any content
+        if (!is_writable(self::SYSTEM_ETC.self::ETC_FILE)) {
+            throw new Exception('File ' . self::SYSTEM_ETC.self::ETC_FILE . ' is not writeable, try running this application as adminstrator');
         }
 
         // write contents to host file
@@ -78,7 +84,7 @@ class FileHandler{
 
         file_put_contents(
             self::ETC_FILE,
-            $ip . ' ' . $hostName,
+            $ip . ' ' . $hostName . "\n",
             FILE_APPEND
         );
     }
