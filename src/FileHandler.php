@@ -9,7 +9,7 @@ use League\Flysystem\Filesystem;
 class FileHandler{
     const HostDir = 'C:\chromedriver_win32\\';
     const HostFile = 'httpd.conf';
-    const VhostDir = 'C:\xampp\apache\conf\extra\\';
+    const VhostDir = 'extra\\';
     const VhostFile = 'httpd-vhosts.conf';
 
     /**
@@ -20,11 +20,11 @@ class FileHandler{
     private $fs;
 
     /**
-     * array of lines that will be writen to vhosts file
+     * lines that will be writen to vhosts file
      *
      * @var Array
      */
-    private $lines;
+    private $lines = [];
 
     public function __construct() {}
 
@@ -38,7 +38,12 @@ class FileHandler{
         }
     }
 
-    
+    /**
+     * iniate filesystem at hosts directory
+     *
+     * @param string $dir
+     * @return void
+     */
     private function changeDir(string $dir) : void
     {
         $this->fs = new Filesystem(new Local($dir, LOCK_UN));
