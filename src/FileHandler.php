@@ -28,7 +28,10 @@ class FileHandler{
     public function __construct() {}
 
     
-
+    private function changeDir(string $dir) : void
+    {
+        $this->fs = new Filesystem(new Local($dir, LOCK_UN));
+    }
 
 
 }
