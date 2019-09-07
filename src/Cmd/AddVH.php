@@ -19,7 +19,7 @@ class AddVH extends Command
         $this
             ->setDescription('Add new Virtual Host')
             ->setHelp('this command for adding new virtual host')
-            ->addOption('host', '-h', InputOption::VALUE_REQUIRED, 'Host name')
+            ->addOption('server', '-s', InputOption::VALUE_REQUIRED, 'Host name')
             ->addOption('dir', '-d', InputOption::VALUE_OPTIONAL, 'Host Directory')
             ->addOption('admin', '-a', InputOption::VALUE_OPTIONAL)
             ->addOption('alias', '-as', InputOption::VALUE_OPTIONAL)
@@ -38,7 +38,7 @@ class AddVH extends Command
             '============',
             '',
         ]);
-        $output->writeln($input->getOption('interactive'));
+        $output->writeln($input->getOption('server'));
     }
 }
 
