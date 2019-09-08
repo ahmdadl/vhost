@@ -14,6 +14,8 @@ composer global require abo3adel/vhost
 ## :sparkles: Usage
 **:heavy_exclamation_mark: Note:** Run as Administrator
 
+![trailer image](https://github.com/abo3adel/vhost/blob/master/trailer.gif)
+
 There are two ways:
 ### :fax: Options Way:
 ```ps 
