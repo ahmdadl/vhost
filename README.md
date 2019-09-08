@@ -1,19 +1,19 @@
-# Virtual Hosts Cli
+# :computer: Virtual Hosts Cli
 Create Virtual Hosts for apache with one click
 
-## Installation
+## :wrench: Installation
 Install with Composer as global for best perfomance
 ```
 composer global require abo3adel/vhost
 ```
-#### Reqirements:
+#### :heavy_exclamation_mark: Reqirements:
 * php: 7.3 or newer
 * symfony/console: 3.4.23
 
 
-## Usage
+## :sparkles: Usage
 There`s two ways:
-### Options Way:
+### :fax: Options Way:
 ```ps 
 C:\xampp\htdocs\project> vhost add -s "project.test"
 Creating Virtual Host From this data
@@ -48,7 +48,7 @@ Existing Application, GoodBuy.
     C:\xampp\htdocs\project> vhost add -s "project.test" -d "C:\xampp\htdocs\someOtherApp" -a "example@some.com" -l "dev.preoject.test" -e "path/to/error/file.log" -c "path/to/custom/file.log"
 ```
 ---
-### Interactive Mode:
+### :gift: Interactive Mode:
 ```ps
 C:\xampp\htdocs\project> vhost i
 
