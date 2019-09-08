@@ -18,10 +18,6 @@
             "AboAdel\\VHost\\": "src/"
         }
     },
-    "require-dev": {
-        "phpunit/phpunit": "^8.3",
-        "mockery/mockery": "^1.2"
-    },
     "scripts": {
         "test": "phpunit"
     },
