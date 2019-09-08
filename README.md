@@ -77,3 +77,5 @@ Creating Virutal Host From this data
 
 ```
 
+## TODO:
+* support linux and macOs
