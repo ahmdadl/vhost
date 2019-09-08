@@ -53,12 +53,6 @@ class FileHandler{
 
     public function addNewHost(object $val) : void
     {
-        
-        // check if file entered
-        if (is_null($val->server)) {
-            throw new Exception('server name must be entered, use [-s|--server ServerName] option');
-        }
-
         // check if vhosts dir exists
         if (!is_dir(self::VhostDir)) {
             throw new Exception(self::VhostDir . ' Directory not Exists at ' . self::HostDir);
