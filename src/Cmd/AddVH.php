@@ -57,6 +57,7 @@ class AddVH extends Command
         $output->writeln($this->printAllValues($val));
 
         try {
+
             // iniate host file handle
             $fh = new FileHandler;
 
@@ -65,6 +66,9 @@ class AddVH extends Command
 
             // append new vhost to file
             $fh->addNewHost($val);
+
+            // append new host to hosts file
+            $fh->appendHostToHostsFile($val->server);
         } catch (Exception $e) {
             $output->writeln(
                 $this->write('Error: ' . $e->getMessage(), 'white', 'red'),
