@@ -13,12 +13,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AddVH extends Command
 {
-    const TEXT_COLOR = 'cyan';
-    const TEXT_BG = 'black';
-    const SEP_COLOR = 'yellow';
-
-    use OutputTrait;
-
     protected static $defaultName = 'xamp-vh:addHost';
 
     protected function configure() : void
@@ -39,20 +33,14 @@ class AddVH extends Command
         OutputInterface $output
     ) : void {
 
-        $val = (object)[];
-        // server name
-        $val->server = $input->getOption('server');
-        // server directory
-        $val->dir =  '"'.($input->getOption('dir') ?? getcwd()). '"';
-        // server admin
-        $val->admin = $input->getOption('admin') ?? '';
-        // server alias
-        $val->alias = $input->getOption('alias') ?? '';
-        // error log file location
-        $val->errorLog = '"'.($input->getOption('error-log') ?? ''). '"';
-        // custom error log
-        $val->customLog = '"'.($input->getOption('custom-log') ?? ''). '"';
-        
+        $val = $this->setObjValues(
+            $input->getOption('server'),
+            $input->getOption('dir') ?? getcwd(),
+            $input->getOption('admin') ?? '',
+            $input->getOption('alias') ?? '',
+            $input->getOption('error-log') ?? '',
+            $input->getOption('custom-log') ?? ''
+        );
 
         $output->writeln($this->printAllValues($val));
 

@@ -43,4 +43,31 @@ trait OutputTrait{
             '</>',
         ];
     }
+
+    protected function setObjValues(
+        string $server,
+        string $dir,
+        string $admin,
+        string $alias,
+        string $errLog,
+        string $cusErr
+    )  : object
+    {
+        $val = (object)[];
+        
+        // server name
+        $val->server = $server;
+        // server directory
+        $val->dir =  '"'.($dir). '"';
+        // server admin
+        $val->admin = $admin;
+        // server alias
+        $val->alias = $alias;
+        // error log file location
+        $val->errorLog = '"'.($errLog). '"';
+        // custom error log
+        $val->customLog = '"'.($cusErr). '"';
+
+        return $val;
+    }
 }
