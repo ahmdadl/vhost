@@ -3,6 +3,7 @@
     "description": "create virtual hosts with xampp",
     "type": "library",
     "require": {
+        "php": "^7.3",
         "symfony/console": "v3.4.23"
     },
     "license": "MIT",
