@@ -25,8 +25,7 @@ class Interactive extends AbstractCmd
         OutputInterface $output
     ) : void {
         $dir = getcwd();
-        chdir('../');
-        $server = str_replace(getcwd().'\\', '', $dir) . '.com';
+        $server = str_replace(dirname($dir).'\\', '', $dir) . '.com';
 
         $io = new SymfonyStyle($input, $output);
 
