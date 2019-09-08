@@ -9,7 +9,7 @@ use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 
 class FileHandler{
-    const HostDir = 'C:\chromedriver_win32\\';
+    const HostDir = 'C:\xampp\apache\conf\\';
     const HostFile = 'httpd.conf';
     const VhostDir = 'extra\\';
     const VhostFile = 'httpd-vhosts.conf';
@@ -53,6 +53,12 @@ class FileHandler{
 
     public function addNewHost(object $val) : void
     {
+        
+        // check if file entered
+        if (is_null($val->server)) {
+            throw new Exception('server name must be entered, use [-s|--server ServerName] option');
+        }
+
         // check if vhosts dir exists
         if (!is_dir(self::VhostDir)) {
             throw new Exception(self::VhostDir . ' Directory not Exists at ' . self::HostDir);
@@ -71,11 +77,9 @@ class FileHandler{
 
         // write to file
         file_put_contents(self::VhostFile, implode("\n", $arr), FILE_APPEND);
-
-        $this->appendHostToHostsFile($val->server);
     }
 
-    private function appendHostToHostsFile(
+    public function appendHostToHostsFile(
         string $hostName,
         string $ip = self::DEFAULT_IP_ADDRESS
     ) : void
