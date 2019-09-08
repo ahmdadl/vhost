@@ -12,7 +12,9 @@ composer global require abo3adel/vhost
 
 
 ## :sparkles: Usage
-There`s two ways:
+**:heavy_exclamation_mark: Note:** Run as Administrator
+
+There are two ways:
 ### :fax: Options Way:
 ```ps 
 C:\xampp\htdocs\project> vhost add -s "project.test"
