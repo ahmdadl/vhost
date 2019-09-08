@@ -13,8 +13,7 @@ composer global require abo3adel/vhost
 
 ## Usage
 There`s two ways:
-#### Options Way:
-
+### Options Way:
 ```ps 
 C:\xampp\htdocs\project> vhost add -s "project.test"
 Creating Virtual Host From this data
@@ -45,7 +44,34 @@ Existing Application, GoodBuy.
 * [-l|--alias **[Server Alias]**] **[Optinal]**
 * [-e|--error-log **[Error Log]**] **[Optinal]**
 * [-c|--custom-log **[Custom Log]**] **[Optinal]**
-```sh
+```ps
     C:\xampp\htdocs\project> vhost add -s "project.test" -d "C:\xampp\htdocs\someOtherApp" -a "example@some.com" -l "dev.preoject.test" -e "path/to/error/file.log" -c "path/to/custom/file.log"
+```
+---
+### Interactive Mode:
+```ps
+C:\xampp\htdocs\project> vhost i
+
+Creating Virutal Host From this data
+====================================
+
+ Server Name ["project.com"]:
+ >
+
+ Server Directory ["C:\xampp\htdocs\project"]:
+ >
+
+ Server Admin Email []:
+ >
+
+ Server Alias []:
+ >
+
+ Error Log File []:
+ >
+
+ Custom Log File []:
+ >
+
 ```
 
