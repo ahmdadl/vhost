@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class AddVH extends Command
+class AddVH extends AbstractCmd
 {
     protected static $defaultName = 'xamp-vh:addHost';
 
@@ -42,28 +42,7 @@ class AddVH extends Command
             $input->getOption('custom-log') ?? ''
         );
 
-        $output->writeln($this->printAllValues($val));
-
-        try {
-
-            // iniate host file handle
-            $fh = new FileHandler;
-
-            // include vhosts file in xampp module loader
-            $fh->includeVHosts();
-
-            // append new vhost to file
-            $fh->addNewHost($val);
-
-            // append new host to hosts file
-            $fh->appendHostToHostsFile($val->server);
-        } catch (Exception $e) {
-            $output->writeln(
-                $this->write('Error: ' . $e->getMessage(), 'white', 'red'),
-            );
-        } finally {
-            $output->writeln($this->write('Existing Application, GoodBuy.', 'green', 'black'));
-        }
+        $this->updateFile($val, $output);
     }
 }
 

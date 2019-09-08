@@ -69,8 +69,8 @@ class Interactive extends AbstractCmd
             $cusLog
         );
 
-        // print all entered values
-        $this->printAllValues($val);
+        $this->updateFile($val, $output);
+        
     }
 }
 
