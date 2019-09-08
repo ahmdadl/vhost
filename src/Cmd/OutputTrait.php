@@ -24,7 +24,7 @@ trait OutputTrait{
     public function printAllValues(object $val) : array
     {
         return [
-            $this->write('Creating Virutal Host From this data', 'yellow'),
+            $this->write('Creating Virtual Host From this data', 'yellow'),
             $this->sep(40, '='),
             '<bg=' . self::TEXT_BG . ';fg=' . self::TEXT_COLOR . '>',
             $this->sep(),
@@ -45,7 +45,7 @@ trait OutputTrait{
     }
 
     protected function setObjValues(
-        string $server,
+        ?string $server,
         string $dir,
         string $admin,
         string $alias,
@@ -53,6 +53,12 @@ trait OutputTrait{
         string $cusErr
     )  : object
     {
+
+        // check if file entered
+        if (is_null($server)) {
+            throw new \Exception('server name must be entered, use [-s|--server ServerName] option');
+        }
+
         $val = (object)[];
         
         // server name
