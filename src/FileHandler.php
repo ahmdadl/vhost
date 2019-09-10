@@ -82,7 +82,7 @@ class FileHandler{
 
         file_put_contents(
             self::ETC_FILE,
-            $ip . ' ' . $hostName . "\n",
+            "\n" . $ip . ' ' . $hostName . "\n",
             FILE_APPEND
         );
     }
