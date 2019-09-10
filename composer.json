@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "php": "^7.3",
-        "symfony/console": "v3.4.23"
+        "symfony/console": "^4.2.11"
     },
     "license": "MIT",
     "authors": [
