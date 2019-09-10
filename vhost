@@ -1,7 +1,11 @@
 #!/usr/bin/env php
 <?php declare(strict_types=1);
 
-require_once __DIR__ . '/vendor/autoload.php';
+if (file_exists(__DIR__.'/../../autoload.php')) {
+    require __DIR__.'/../../autoload.php';
+} else {
+    require __DIR__.'/vendor/autoload.php';
+}
 
 use AboAdel\VHost\Cmd\{AddVH, Interactive};
 
